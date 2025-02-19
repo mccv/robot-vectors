@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot Frame Visualizer</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="visualization"></div>
+    <div class="controls-container">
+        <div class="readouts">
+            <h3>April Tag Pose in Various Frames of Reference</h3>
+            <div class="readout-group">
+                <h4>Field Frame of Reference</h4>
+                <div class="readout-row">
+                    <label>Magnitude:</label>
+                    <input type="number" id="fieldMagnitude" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>X Component:</label>
+                    <input type="number" id="fieldXComp" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>Y Component:</label>
+                    <input type="number" id="fieldYComp" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>Angle:</label>
+                    <input type="number" id="fieldAngleRead" readonly>
+                </div>
+            </div>
+            <div class="readout-group">
+                <h4>Robot Frame of Reference</h4>
+                <div class="readout-row">
+                    <label>Magnitude:</label>
+                    <input type="number" id="robotMagnitude" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>X Component:</label>
+                    <input type="number" id="robotXComp" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>Y Component:</label>
+                    <input type="number" id="robotYComp" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>Angle:</label>
+                    <input type="number" id="robotAngleRead" readonly>
+                </div>
+            </div>
+            <div class="readout-group">
+                <h4>Camera Frame of Reference</h4>
+                <div class="readout-row">
+                    <label>Magnitude:</label>
+                    <input type="number" id="cameraMagnitude" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>X Component:</label>
+                    <input type="number" id="cameraXComp" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>Y Component:</label>
+                    <input type="number" id="cameraYComp" readonly>
+                </div>
+                <div class="readout-row">
+                    <label>Angle:</label>
+                    <input type="number" id="cameraAngleRead" readonly>
+                </div>
+            </div>
+            <div class="vector-toggles">
+                <div class="readout-row">
+                    <label>Show Vectors:</label>
+                    <label class="vector-toggle-label">
+                        <input type="checkbox" id="fieldVectorVisible" checked>
+                        <span class="field-vector-text">Field</span>
+                    </label>
+                    <label class="vector-toggle-label">
+                        <input type="checkbox" id="robotVectorVisible" checked>
+                        <span class="robot-vector-text">Robot</span>
+                    </label>
+                    <label class="vector-toggle-label">
+                        <input type="checkbox" id="cameraVectorVisible" checked>
+                        <span class="camera-vector-text">Camera</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div id="controls">
+            <div class="control-group">
+                <h4>Robot Position</h4>
+                <div class="control-row">
+                    <label>Robot X:</label>
+                    <input type="range" id="robotX" min="-200" max="200" value="0">
+                    <input type="number" id="robotXNum" value="0" min="-200" max="200">
+                </div>
+                <div class="control-row">
+                    <label>Robot Y:</label>
+                    <input type="range" id="robotY" min="-200" max="200" value="0">
+                    <input type="number" id="robotYNum" value="0" min="-200" max="200">
+                </div>
+                <div class="control-row">
+                    <label>Rotation:</label>
+                    <input type="range" id="robotRotation" min="-180" max="180" value="0">
+                    <input type="number" id="robotRotationNum" value="0" min="-180" max="180">
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h4>Camera Offset</h4>
+                <div class="control-row">
+                    <label>Camera X:</label>
+                    <input type="range" id="cameraX" min="-100" max="100" value="0">
+                    <input type="number" id="cameraXNum" value="0" min="-100" max="100">
+                </div>
+                <div class="control-row">
+                    <label>Camera Y:</label>
+                    <input type="range" id="cameraY" min="-100" max="100" value="0">
+                    <input type="number" id="cameraYNum" value="0" min="-100" max="100">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4>AprilTag Position</h4>
+                <div class="control-row">
+                    <label>Tag X:</label>
+                    <input type="range" id="tagX" min="-200" max="200" value="100">
+                    <input type="number" id="tagXNum" value="100" min="-200" max="200">
+                </div>
+                <div class="control-row">
+                    <label>Tag Y:</label>
+                    <input type="range" id="tagY" min="-200" max="200" value="100">
+                    <input type="number" id="tagYNum" value="100" min="-200" max="200">
+                </div>
+                <div class="control-row">
+                    <label>Tag Rotation:</label>
+                    <input type="range" id="tagRotation" min="-180" max="180" value="180">
+                    <input type="number" id="tagRotationNum" value="180" min="-180" max="180">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <h4>View</h4>
+                <div class="control-row">
+                    <label>Zoom:</label>
+                    <input type="range" id="zoomLevel" min="0.1" max="2" step="0.1" value="1">
+                    <input type="number" id="zoomLevelNum" value="1" min="0.1" max="2" step="0.1">
+                </div>
+                <div class="control-row">
+                    <button id="resetView">Reset View</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="visualizer.js"></script>
+</body>
+</html> 
